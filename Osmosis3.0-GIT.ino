@@ -1,3 +1,6 @@
+//PROGRAMA OSMOSIS 3.0 PARA CLIENTE KEEPEX  
+//DESARROLLADOR: FRANCISCO REATEGUI
+
 #include <Wire.h> //para la lectura de i2c
 #include <Adafruit_ADS1015.h> //libreria de los ADC
 #include "SHTSensor.h" //Sensor de temperatura y humedad
