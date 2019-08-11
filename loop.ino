@@ -77,7 +77,7 @@ void loop() {
     Serial1.write(0xff);
     Serial1.write(0xff);
     Serial1.write(0xff);
-    dac.setVoltage(4000, false);//la valvulamotorizada se va a 0 incluir codigo.
+    dac.setVoltage(3000, false);//la valvulamotorizada se va a 0 incluir codigo. //antes era 2000, ojo.
     if (posicionvalvula >= 1900) //20 MENOS POR SEGURIDAD
     {
       activador("contactorbaja", 1);
@@ -97,8 +97,8 @@ void loop() {
  else if (iniciodeplanta == 1 && botononoff == 1 ) //cuando la funcion "iniciodeplanta" está en 1, empieza la rutina de inicio.
   {
      
-    if (millis() - cronometroinicio < 5000 ) //primer paso de inicio de la planta, bomba de baja y electrovalvula se activan por X segundos
-    { dac.setVoltage(2000, false);//LA VALVULA SE ABRIRA EN EL INICIO DE LA PLANTA, DESPUES EMPIEZA LA REGULACION... (NUEVO)
+    if (millis() - cronometroinicio < 10000 ) //primer paso de inicio de la planta, bomba de baja y electrovalvula se activan por X segundos
+    { dac.setVoltage(3000, false);//LA VALVULA SE ABRIRA EN EL INICIO DE LA PLANTA, DESPUES EMPIEZA LA REGULACION... (NUEVO)
       activador("contactorbaja", 1);
       activador("electrovalvula", 1);
     }
@@ -152,7 +152,7 @@ void loop() {
         else pidvalvula=500; //menos velocidad
 
         
-        if (valorvalvula > 0 && valorvalvula <= 2000)
+        if (valorvalvula > 0 && valorvalvula <= 4000)
         { valorvalvula = valorvalvula - precision;
           dac.setVoltage(valorvalvula, false);
         }
@@ -164,7 +164,7 @@ void loop() {
           }
         else pidvalvula=500;
         
-        if (valorvalvula >= 0 && valorvalvula < 2000)
+        if (valorvalvula >= 0 && valorvalvula < 4000) //valor original mayor es de 2000, ojo
         { valorvalvula = valorvalvula + precision;
           dac.setVoltage(valorvalvula, false);
         }

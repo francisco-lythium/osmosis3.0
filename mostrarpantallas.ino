@@ -44,7 +44,8 @@ void mostrarpantallas(void)
     Serial1.write(0xff);Serial1.write(0xff);Serial1.write(0xff);
 
     Serial1.print("n9.val=");  // tds del agua
-    Serial1.print(posicionvalvula);  // 
+    //Serial1.print(posicionvalvula);  // ORIGINAL, VOLVER A SU ESTADO NORMAL
+    Serial1.print( map(ads3.readADC_SingleEnded(2),4899,23300,0,100));
     Serial1.write(0xff);Serial1.write(0xff);Serial1.write(0xff);
 
     Serial1.print("n10.val=");  // temperatura ambiente
@@ -55,8 +56,10 @@ void mostrarpantallas(void)
     Serial1.print(humedad);  // 
     Serial1.write(0xff);Serial1.write(0xff);Serial1.write(0xff);
 
-    Serial1.print("n13.val=");  // temperatura ambiente
-    Serial1.print(puertatablero);  // 
+    Serial1.print("t31.txt=");  // temperatura ambiente
+   Serial1.print("\"");
+    Serial1.print(caudalimetrouno);  // 
+    Serial1.print("\"");
     Serial1.write(0xff);Serial1.write(0xff);Serial1.write(0xff);
 
     Serial1.print("n13.val=");  // temperatura ambiente
@@ -212,6 +215,10 @@ display.setCursor(88,9);
 display.setCursor(88,18);
   display.print("v:");
   display.println(valorvalvula,1);
+  
+display.setCursor(88,27);
+  display.print("F:");
+  display.println(caudalimetrouno);
   
   
 

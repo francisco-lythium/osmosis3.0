@@ -1,35 +1,42 @@
 void lecturasensores(void)
 {
   
-  //presionuno    = map(ads1.readADC_SingleEnded(0),460,30000,0,58);
- // presiondos    = map(ads1.readADC_SingleEnded(1),460,30000,0,58);
- // presiontres   = map(ads1.readADC_SingleEnded(2),460,30000,0,58);
- // presioncuatro = map(ads1.readADC_SingleEnded(3),480,29400,0,1450); //1450 original //33600 original
-  presionuno    = ads1.readADC_SingleEnded(0);
-  presiondos    = ads1.readADC_SingleEnded(1);
-  presiontres   = ads1.readADC_SingleEnded(2);
-  presioncuatro = ads1.readADC_SingleEnded(3); //1450 original //33600 original
+  presionuno    = map(ads1.readADC_SingleEnded(0),4681,23300,0,50);
+  presiondos    = map(ads1.readADC_SingleEnded(1),4681,23300,0,50);
+  presiontres   = map(ads1.readADC_SingleEnded(2),4681,23300,0,50);
+  presioncuatro = map(ads1.readADC_SingleEnded(3),4681,23300,0,1450); //1450 original //33600 original
+ // presionuno    = ads1.readADC_SingleEnded(0);
+ // presiondos    = ads1.readADC_SingleEnded(1);
+ // presiontres   = ads1.readADC_SingleEnded(2);
+  //presioncuatro = ads1.readADC_SingleEnded(3); //1450 original //33600 original
 
- //presionestanque    = map(ads2.readADC_SingleEnded(0),460,10000,0,880);
-  presionestanque    = ads2.readADC_SingleEnded(0);
-  temperaturaagua    = ads2.readADC_SingleEnded(1);
-  tds                = ads2.readADC_SingleEnded(2);
+  
+  presionestanque    = map(ads2.readADC_SingleEnded(0),4899,23679,0,10000);
+  temperaturaagua    = map(ads2.readADC_SingleEnded(1),7500,9000,10,20);
+  tds                = map(ads2.readADC_SingleEnded(2),6280,17200,0,400);
  
- // temperaturaagua    = map(ads2.readADC_SingleEnded(1),0,32000,0,50);
- // tds                = map(ads2.readADC_SingleEnded(2),0,32000,0,2000);
- // sensorvibracion    = map(ads3.readADC_SingleEnded(0),460,30000,0,30); //ADS #37
- // sensorvibracion    = map(ads3.readADC_SingleEnded(0),460,30000,0,30); //ADS #37
-
-  sensorvibracion    = ads3.readADC_SingleEnded(0); //ADS #37
-  sensorvibracion2    = ads3.readADC_SingleEnded(1);
-  posicionvalvula    = ads3.readADC_SingleEnded(2); //ADS #3 valor antiguo 17536
+  
+ // presionestanque    = ads2.readADC_SingleEnded(0);
+ // temperaturaagua    = ads2.readADC_SingleEnded(1);
+  //tds                = ads2.readADC_SingleEnded(2);
+ 
+  sensorvibracion    = map(ads3.readADC_SingleEnded(0),4700,23300,0,30); //ADS #37
+  sensorvibracion2    = map(ads3.readADC_SingleEnded(1),4700,23300,0,30);
+  posicionvalvula    = map(ads3.readADC_SingleEnded(2),4899,23300,0,2000); //ADS #3 valor antiguo 17536
+ 
+  
+ // sensorvibracion    = ads3.readADC_SingleEnded(0); //ADS #37
+ // sensorvibracion2    = ads3.readADC_SingleEnded(1);
+  //posicionvalvula    = ads3.readADC_SingleEnded(2); //ADS #3 valor antiguo 17536
  
  // posicionvalvula    = map(ads3.readADC_SingleEnded(1),618,24391,0,2000); //ADS #3 valor antiguo 17536
   
   sensorcorriente    = ads4.readADC_SingleEnded(0); //ADS #4
   sensorcorriente2    = ads4.readADC_SingleEnded(1); //ADS #4
  
- 
+  Wire.requestFrom(9,1);
+  caudalimetrouno=(Wire.read()/10.0);
+  
  // sensorcorriente    = map(ads3.readADC_SingleEnded(3),460,30000,0,30); //ADS #3
 
   sht.readSample();
@@ -73,6 +80,7 @@ void lecturasensores(void)
  data["estanque"] = presionestanque;
  data["tempagua"] = temperaturaagua;
  data["tds"] = tds;
+ data["caudalimetrouno"]=caudalimetrouno;
  
  data["tempambiente"] = temperatura; //LO SAQUE PORQUE ME DABA ERROR EN EL JSON 
  data["humedad"] = humedad;

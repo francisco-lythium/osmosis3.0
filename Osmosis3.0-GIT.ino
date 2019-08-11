@@ -22,15 +22,15 @@ Adafruit_ADS1115 ads2 (0x4a); //presion estanque, temperaturaagua, tds
 Adafruit_ADS1115 ads3 (0x48); //vibracion, corriente, posicion valvula
 Adafruit_ADS1115 ads4 (0x4B); ///corriente 1, corriente 2,
 
-//PCF8574 pcf8574out(0x26); //es de entrada...se debe cambiar el nombre out por in
-PCF8574 pcf8574out(0x3E); //es de entrada...se debe cambiar el nombre out por in
+PCF8574 pcf8574out(0x26); //es de entrada...se debe cambiar el nombre out por in
+//PCF8574 pcf8574out(0x3E); //es de entrada...se debe cambiar el nombre out por in
 
 
-PCF8574 pcf8574in(0x38); //direccion expansor input //ahora es el output//original es 20
-//PCF8574 pcf8574in(0x20);
+//PCF8574 pcf8574in(0x38); //direccion expansor input //ahora es el output//original es 20
+PCF8574 pcf8574in(0x20);
 
-//PCF8574 pcf8574in2(0x24); //direccion expansor input
-PCF8574 pcf8574in2(0x3F); //direccion expansor input
+PCF8574 pcf8574in2(0x24); //direccion expansor input
+//PCF8574 pcf8574in2(0x3F); //direccion expansor input
 
 
 unsigned long timeElapsed;//EXPANSOR I/O
@@ -55,6 +55,7 @@ unsigned int sensorcorriente2; //ADS #4
 float temperatura;
 float humedad;
 
+float caudalimetrouno;
 
 //---------------------------fin declaracion de variables analogas
 
@@ -174,13 +175,13 @@ JsonObject& question = jsonBuffer2.createObject(); //segundo JSON
 //----------------------fin declaracion JSON-----------------
 
 //------------------inicio declaracion electrovalvula----------
-int rango1=900; //rango bajo 
+int rango1=880; //rango bajo 
 byte direccionrango1=0; //direccion en la eeprom de la direccion
-int rango2=930;
+int rango2=910;
 byte direccionrango2=10;
-int valorvalvula=1200; //original 1200
+int valorvalvula=3000; //original 1200
 int retrovalorvalvula; //esta variable ya se lee antes y se llama posicion valvula
-int precision=2;
+int precision=5; //velocidad de valvula
 unsigned long cronometrovalvula=0;
 int pidvalvula=300;
 
